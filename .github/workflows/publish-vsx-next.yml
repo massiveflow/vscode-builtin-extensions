@@ -1,7 +1,5 @@
 name: ovsx-preview--publish-vscode-built-in-extensions
 on:
-  schedule:
-    - cron: "30 0 * * *"
   push:
     branches:
       - master
@@ -14,7 +12,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       OVSX_PAT: ${{ secrets.OVSX_PAT}}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - run: |
           git submodule init
           git submodule update
@@ -28,7 +26,7 @@ jobs:
           sudo update-rc.d xvfb defaults
           sudo service xvfb start
         name: Setup Build Environment
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 14
       - run: |
